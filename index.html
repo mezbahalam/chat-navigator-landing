@@ -4,9 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Navigator - Stop losing your best ChatGPT work</title>
+    <title>ChatGPT Bookmark Manager & Prompt Manager | Chat Navigator</title>
     <meta name="description"
-        content="Save the replies and prompts you actually reuse. Search them instantly. Reuse them in one click.">
+        content="The best ChatGPT bookmark manager and prompt manager. A privacy-first Chrome extension that saves your chats (titles + links) and reusable prompts. Never stores message content.">
+    <link rel="canonical" href="https://infolily.com/chat-navigator/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://infolily.com/chat-navigator/" />
+    <meta property="og:title" content="ChatGPT Bookmark Manager & Prompt Manager | Chat Navigator" />
+    <meta property="og:description"
+        content="The best ChatGPT bookmark manager and prompt manager. A privacy-first Chrome extension that saves your chats (titles + links) and reusable prompts. Never stores message content." />
+    <meta property="og:image" content="https://infolily.com/chat-navigator/og-image.jpg" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Chat Navigator",
+          "operatingSystem": "Chrome",
+          "applicationCategory": "ProductivityApplication",
+          "url": "https://infolily.com/chat-navigator/",
+          "sameAs": ["https://chromewebstore.google.com/detail/aapchhfjoohmohpdcadghjacklcdfdml?utm_source=infolily"],
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "name": "Free Tier"
+            },
+            {
+              "@type": "Offer",
+              "price": "5",
+              "priceCurrency": "USD",
+              "name": "Premium Tier",
+              "description": "Upgrade happens inside the extension after install."
+            }
+          ],
+          "description": "A Chrome extension to bookmark ChatGPT conversations (titles + links) and save reusable prompts."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does Chat Navigator work only on ChatGPT?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Chat Navigator is designed specifically for ChatGPT (chatgpt.com) to enhance your workflow there."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What exactly gets saved?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Bookmarks store chat title + conversation link/ID only. We never store your chat messages. Prompts you create are saved to our server under your account."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you read my other tabs or websites?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Chat Navigator strictly runs only on ChatGPT. It does not access any other tabs or websites."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What’s included in Premium?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Premium increases your bookmark and prompt limits significantly. Free users get generous starter limits (30 bookmarks/prompts). Upgrade happens inside the extension after install."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when I hit the free limit?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can continue using all features but won't be able to add new items until you delete old ones or upgrade to Premium."
+              }
+            },
+             {
+              "@type": "Question",
+              "name": "Can I delete my saved items?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can delete any bookmark or prompt instantly at any time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is this affiliated with OpenAI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No, Chat Navigator is an independent extension built to enhance the ChatGPT experience. We are not affiliated with OpenAI."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
     <link href="./output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -83,11 +186,12 @@
                     <div class="lg:col-span-5 text-center lg:text-left mb-12 lg:mb-0">
                         <h1
                             class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight">
-                            Stop losing your best ChatGPT chats.
+                            ChatGPT Bookmark & Prompt Manager
                         </h1>
                         <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
-                            Bookmark chats (title + link) and save prompts you actually reuse. Search them instantly.
-                            Reuse saved prompts or reopen saved chats in one click.
+                            Bookmark ChatGPT chats (title + link) and save reusable prompts. We never store your chat
+                            messages.
+                            Search instantly and reuse in one click.
                         </p>
 
                         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-4">
@@ -112,39 +216,44 @@
                         </div>
 
                         <!-- Trust Chips -->
-                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-2">
-                            <div
-                                class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-600">
-                                <svg class="w-3 h-3 mr-1.5 text-gray-400" fill="none" stroke="currentColor"
+                        <div class="flex flex-col gap-3 mb-2">
+                            <div class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                                    </path>
+                                        d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                You choose what gets saved
+                                <span class="text-sm text-gray-600">Bookmarks store only chat title + conversation ID
+                                    (not chat messages).</span>
                             </div>
-                            <div
-                                class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-600">
-                                <svg class="w-3 h-3 mr-1.5 text-gray-400" fill="none" stroke="currentColor"
+                            <div class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Runs on ChatGPT only
+                                <span class="text-sm text-gray-600">Prompts you create are saved to our server under
+                                    your account.</span>
                             </div>
-                            <div
-                                class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-600">
-                                <svg class="w-3 h-3 mr-1.5 text-gray-400" fill="none" stroke="currentColor"
+                            <div class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                                    </path>
+                                        d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Not affiliated with OpenAI
+                                <span class="text-sm text-gray-600">You choose what gets saved. Nothing is
+                                    auto-saved.</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-sm text-gray-600">Clear pricing: Free includes features. Premium only
+                                    increases limits.</span>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 text-center lg:text-left">All features included • Premium only
-                            increases limits</p>
                     </div>
 
                     <!-- Right: ProductHeroPanel (Code-Based Illustration) -->
@@ -164,7 +273,7 @@
                                     </div>
                                     <input type="text" disabled
                                         class="block w-full pl-10 pr-3 py-1.5 border border-ui-border rounded-lg leading-5 bg-ui-panel/50 text-ui-text placeholder-ui-muted focus:outline-none sm:text-sm"
-                                        placeholder="Search messages, code blocks, content...">
+                                        placeholder="Search saved chats (titles) and prompts instantly">
                                 </div>
                             </div>
 
@@ -510,7 +619,7 @@
                                         </div>
                                         <div
                                             class="block w-full pl-8 py-2 border border-white/10 rounded-lg bg-[#1e293b] text-[11px] text-gray-400">
-                                            Search messages, code blocks...</div>
+                                            Search saved chats (titles) and prompts instantly.</div>
                                     </div>
                                 </div>
                                 <!-- Filter Pills -->
