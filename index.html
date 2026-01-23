@@ -10,6 +10,24 @@
     <link href="./output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            page_type: 'landing',
+            site: 'infolily',
+            locale: 'en'
+        });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5FBJMJQG');</script>
+    <!-- End Google Tag Manager -->
+    <script>
         function switchTab(tabId) {
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -32,6 +50,10 @@
 </head>
 
 <body class="bg-white text-gray-900 antialiased font-sans flex flex-col min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBJMJQG" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- 1) Sticky Header -->
     <header class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
@@ -948,6 +970,53 @@
                 icon.classList.remove('rotate-180');
             }
         }
+    </script>
+    <script>
+        (function () {
+            // helper to push events
+            function pushEvent(name, params) { window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event: name }, params || {})); }
+            // helper: read UTMs from current URL
+            function getUTMs() {
+                try {
+                    const s = new URLSearchParams(location.search);
+                    return {
+                        utm_source: s.get('utm_source') || '',
+                        utm_medium: s.get('utm_medium') || '',
+                        utm_campaign: s.get('utm_campaign') || '',
+                        utm_content: s.get('utm_content') || ''
+                    };
+                } catch (e) { return {}; }
+            }
+
+            // INSTALL clicks (all Chrome Web Store links)
+            document.querySelectorAll('a[href*="chromewebstore.google.com/detail/"]').forEach(a => {
+                a.addEventListener('click', function () {
+                    const u = new URL(this.href);
+                    const pageUTM = getUTMs();
+                    // infer section from parents or attributes if needed, or default to 'unknown'
+                    let section = this.closest('header') ? 'header' : (this.closest('section') ? this.closest('section').id || 'body' : 'unknown');
+
+                    pushEvent('install_click', {
+                        section,
+                        source: section,
+                        utm_source: u.searchParams.get('utm_source') || pageUTM.utm_source,
+                        utm_medium: u.searchParams.get('utm_medium') || pageUTM.utm_medium,
+                        utm_campaign: u.searchParams.get('utm_campaign') || pageUTM.utm_campaign,
+                        utm_content: u.searchParams.get('utm_content') || pageUTM.utm_content
+                    });
+                });
+            });
+
+            // PRICING viewed (fires when 50% visible)
+            const pricing = document.getElementById('pricing');
+            if (pricing && 'IntersectionObserver' in window) {
+                new IntersectionObserver((entries, obs) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) { pushEvent('pricing_view', Object.assign({ section: 'pricing' }, getUTMs())); obs.unobserve(pricing); }
+                    });
+                }, { threshold: 0.5 }).observe(pricing);
+            }
+        })();
     </script>
 </body>
 
