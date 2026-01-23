@@ -61,11 +61,11 @@
                     <div class="lg:col-span-5 text-center lg:text-left mb-12 lg:mb-0">
                         <h1
                             class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight">
-                            Stop losing your best ChatGPT answers.
+                            Stop losing your best ChatGPT chats.
                         </h1>
                         <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
-                            Save chats and prompts you actually reuse. Search them instantly. Reuse saved prompts and
-                            reopen saved chats in one click.
+                            Bookmark chats (title + link) and save prompts you actually reuse. Search them instantly.
+                            Reuse saved prompts or reopen saved chats in one click.
                         </p>
 
                         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-4">
@@ -307,6 +307,14 @@
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
+                                                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                                    </svg></button>
+                                                <button
+                                                    class="px-2 py-1 rounded text-ui-muted hover:text-ui-text transition"><svg
+                                                        class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
                                                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                     </svg></button>
                                             </div>
@@ -329,6 +337,14 @@
                                             <div class="flex gap-1">
                                                 <button
                                                     class="px-2 py-1 rounded bg-white/10 text-[10px] text-ui-text hover:bg-white/20 transition">Insert</button>
+                                                <button
+                                                    class="px-2 py-1 rounded text-ui-muted hover:text-ui-text transition"><svg
+                                                        class="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                                    </svg></button>
                                                 <button
                                                     class="px-2 py-1 rounded text-ui-muted hover:text-ui-text transition"><svg
                                                         class="w-3.5 h-3.5" fill="none" stroke="currentColor"
@@ -449,8 +465,9 @@
                                 </div>
                             </div>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 text-center mb-1">Save Messages</h3>
-                        <p class="text-center text-gray-500 text-sm">One-click bookmark from any chat.</p>
+                        <h3 class="text-lg font-bold text-gray-900 text-center mb-1">Bookmark Chats</h3>
+                        <p class="text-center text-gray-500 text-sm">Save a 1-click link back to any chat.</p>
+                        <p class="text-center text-gray-400 text-xs mt-1">Travel plans • recipes • work notes</p>
                     </div>
 
                     <!-- Feature 2: Find Instantly (Detailed UI) -->
@@ -544,6 +561,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 text-center mb-1">Find Instantly</h3>
                         <p class="text-center text-gray-500 text-sm">Instant keyword search across history.</p>
+                        <p class="text-center text-gray-400 text-xs mt-1">Search across saved chats + prompts</p>
                     </div>
 
                     <!-- Feature 3: Reuse Prompts (Detailed UI) -->
@@ -610,6 +628,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 text-center mb-1">Reuse Prompts</h3>
                         <p class="text-center text-gray-500 text-sm">Insert perfected prompts in seconds.</p>
+                        <p class="text-center text-gray-400 text-xs mt-1">Emails • summaries • brainstorms</p>
                     </div>
 
                 </div>
@@ -626,6 +645,7 @@
                     <h2 class="text-3xl font-bold text-gray-900">
                         Premium lets you keep everything.
                     </h2>
+                    <p class="text-gray-500 text-sm mt-2">Free includes everything. Premium only increases limits.</p>
                 </div>
 
                 <!-- Cards -->
@@ -679,68 +699,20 @@
                         </div>
 
                         <div class="mt-auto">
-                            <a href="#"
+                            <a href="https://chromewebstore.google.com/detail/aapchhfjoohmohpdcadghjacklcdfdml?utm_source=infolily"
+                                target="_blank" rel="noopener noreferrer"
                                 class="block w-full text-center py-3 px-4 bg-primary-600 rounded-xl text-white font-medium hover:bg-primary-700 transition shadow-lg shadow-primary-500/20">
-                                Upgrade — $5/month
+                                Install to unlock Premium
                             </a>
+                            <p class="text-xs text-gray-400 text-center mt-3">
+                                Upgrade happens inside the extension (after install).
+                            </p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Limits Visual -->
-                <div class="max-w-2xl mx-auto mb-10">
-                    <div class="mb-2 flex justify-between text-sm font-semibold text-gray-700">
-                        <span>24 / 30 saved</span>
-                        <span class="text-gray-400 font-normal">Free limit</span>
-                        <span class="text-gray-300 font-normal">Premium</span>
-                    </div>
-                    <div class="h-3 bg-white border border-gray-100 rounded-full overflow-hidden relative shadow-inner">
-                        <!-- Usage -->
-                        <div class="absolute left-0 top-0 bottom-0 bg-primary-600 w-[60%] z-20 rounded-full"></div>
-                        <!-- Marker -->
-                        <div class="absolute left-[80%] top-0 bottom-0 w-0.5 bg-gray-300 z-30"></div>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <p class="text-sm text-gray-500">
-                            If you save ~2 items/day, you hit 30 in about <strong class="text-gray-900">2
-                                weeks</strong>.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- 6) Limit Decision Box (High Prominence) -->
-                <div
-                    class="max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-amber-500/5 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                        <svg class="w-32 h-32 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z" />
-                        </svg>
-                    </div>
-                    <div class="flex items-center relative z-10">
-                        <div
-                            class="p-4 bg-amber-100 text-amber-600 rounded-lg mr-5 flex-shrink-0 shadow-sm border border-amber-200">
-                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="text-center sm:text-left">
-                            <div class="font-bold text-gray-900 text-xl mb-1">Approaching the limit?</div>
-                            <div class="text-sm text-gray-600">Don't lose your work. Keep everything safe.</div>
-                        </div>
-                    </div>
-                    <div
-                        class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto relative z-10">
-                        <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition">Manage
-                            library</a>
-                        <a href="#"
-                            class="w-full sm:w-auto text-center px-6 py-3 bg-gray-900 text-white text-base font-semibold rounded-lg hover:bg-gray-800 transition shadow-lg transform hover:-translate-y-0.5">
-                            Upgrade — keep everything
-                        </a>
                     </div>
                 </div>
             </div>
+        </section>
+        </div>
         </section>
 
         <!-- 6.5) FAQ Section (Accordion) -->
