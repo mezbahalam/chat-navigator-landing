@@ -1421,6 +1421,20 @@
             transform: translate(-50%, -46%) scale(0.95);
         }
 
+        .demo-cta-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2px;
+        }
+
+        .demo-cta-icon {
+            width: 20px;
+            height: 20px;
+            color: #34D399;
+            /* Emerald 400 */
+        }
+
         .demo-cta-title {
             font-size: 13px;
             font-weight: 700;
@@ -1464,7 +1478,7 @@
         }
 
         .final-cta {
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -1483,6 +1497,10 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.25s ease, transform 0.25s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
         }
 
         .final-cta.show {
@@ -2033,8 +2051,7 @@
                         Stop losing your best ChatGPT chats.
                     </h1>
                     <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
-                        Bookmark ChatGPT chats (title + link) and save reusable prompts.
-                        Search instantly and reuse in one click.
+                        Bookmark chats. Save prompts. Find them fast.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
@@ -3103,7 +3120,14 @@
             <!-- Play Demo CTA Button (positioned within demo section) -->
             <button class="demo-cta" type="button" aria-label="Play demo">
                 <span class="demo-cta-pulse" aria-hidden="true"></span>
-                <span class="demo-cta-title">Play Demo</span>
+                <div class="demo-cta-header">
+                    <svg class="demo-cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="demo-cta-title">Play Demo</span>
+                </div>
                 <span class="demo-cta-subtitle">See bookmarks, prompts, and save flows in 20 seconds.</span>
             </button>
 
@@ -3115,6 +3139,11 @@
                     <div class="demo-subtitle"></div>
                 </div>
             </div>
+
+            <!-- Final CTA (Absolute) -->
+            <!-- Final CTA (Absolute) -->
+            <a href="https://chromewebstore.google.com/detail/aapchhfjoohmohpdcadghjacklcdfdml?utm_source=infolily"
+                target="_blank" rel="noopener noreferrer" class="final-cta">Add to Chrome</a>
 
             </div>
             </div>
@@ -3750,7 +3779,6 @@
         })();
     </script>
     <!-- FOOTER_INJECTION_POINT -->
-    <button class="final-cta" type="button">Add to Chrome</button>
     <div class="demo-cursor" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
