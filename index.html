@@ -113,44 +113,45 @@
     <link href="./output.css" rel="stylesheet">
     <style>
         :root {
-            --desktop-bg: radial-gradient(circle at 20% 10%, #2a2d34 0%, #1b1e24 45%, #121417 100%);
-            --menu-bg: #2b2f35;
-            --menu-text: #e5e7eb;
-            --menu-muted: #9aa0a6;
-            --chrome-bg: #2a2d33;
-            --chrome-toolbar: #23252a;
-            --chrome-border: #3a3d44;
-            --chrome-shadow: rgba(0, 0, 0, 0.6);
-            --window-radius: 16px;
-            --tab-bg: #3a3d44;
-            --tab-active: #191b20;
-            --tab-text: #f3f4f6;
-            --tab-muted: #b0b6bf;
-            --omnibox-bg: #14161a;
-            --omnibox-border: #353942;
-            --omnibox-text: #e5e7eb;
-            --omnibox-muted: #9aa0a6;
-            --sidebar-bg: #16181c;
-            --sidebar-border: #2a2d34;
-            --sidebar-text: #e5e7eb;
-            --sidebar-muted: #9aa0a6;
-            --chat-bg: #121417;
-            --chat-surface: #1b1e24;
-            --chat-border: #2a2d34;
-            --chat-text: #e6e7eb;
-            --chat-muted: #9aa0a6;
-            --chip-bg: #23262d;
-            --input-bg: #181a1f;
-            --input-border: #2a2d34;
-            --accent: #10a37f;
-            --panel-bg: #1a1d22;
-            --panel-header: #1f232a;
-            --panel-border: #2a2d34;
-            --panel-card: #20242b;
-            --panel-card-border: #2f3540;
-            --panel-blue: #4f8ff0;
-            --panel-green: #22c55e;
-            --panel-yellow: #fbbf24;
+            /* Enterprise Light Theme Palette */
+            --chrome-bg: #DFE1E5;
+            --chrome-toolbar: #FFFFFF;
+            /* White Toolbar */
+            --chrome-border: #E0E0E0;
+            --chrome-inner-border: rgba(0, 0, 0, 0.1);
+
+            /* Window Chrome */
+            --window-radius: 12px;
+            --window-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.08),
+                0 24px 64px -12px rgba(0, 0, 0, 0.14),
+                0 48px 96px -24px rgba(0, 0, 0, 0.1);
+
+            /* Tabs */
+            --tab-bg: transparent;
+            --tab-active: #FFFFFF;
+            /* Matches toolbar for seamless look */
+            --tab-text: #5F6368;
+            --tab-text-active: #1F2937;
+            --tab-hover: rgba(0, 0, 0, 0.05);
+
+            /* Omnibox */
+            --omnibox-bg: #F1F3F4;
+            /* Chrome Light Gray */
+            --omnibox-border: transparent;
+            --omnibox-text: #1F2937;
+            --omnibox-muted: #64748B;
+            --omnibox-focus-ring: rgba(26, 115, 232, 0.4);
+
+            /* Content & Sidebar Colors (Preserved/Refined) */
+            --sidebar-bg: #F3F4F6;
+            --sidebar-border: #E5E7EB;
+            --chat-bg: #FFFFFF;
+            /* White Chat */
+            --chat-surface: #F9FAFB;
+
+            /* Utils */
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
         * {
@@ -172,93 +173,166 @@
             height: min(900px, 85vh);
             background: var(--chrome-bg);
             border-radius: var(--window-radius);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--window-shadow);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border: 1px solid #1b1d22;
-            animation: rise 350ms ease-out;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            /* Physical light border */
+            animation: rise 0.8s var(--ease-out) forwards;
+            position: relative;
+        }
+
+        /* High-quality highlight ring */
+        .chrome-window::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: var(--window-radius);
+            padding: 1px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         @keyframes rise {
             from {
                 opacity: 0;
-                transform: translateY(16px) scale(0.99);
+                transform: translateY(40px) scale(0.98);
+                filter: blur(10px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
+                filter: blur(0);
             }
         }
 
         .tab-bar {
-            height: 40px;
+            height: 44px;
+            /* Slightly taller for modern look */
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 0 12px;
-            border-bottom: 1px solid var(--chrome-border);
+            gap: 16px;
+            padding: 8px 16px 0;
+            /* Tabs sit on bottom of this bar */
             background: var(--chrome-bg);
+            position: relative;
+            z-index: 10;
         }
 
         .window-controls {
             display: flex;
             gap: 8px;
+            padding-right: 8px;
+            align-items: center;
+            height: 100%;
+            padding-bottom: 8px;
         }
 
         .control {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Inner gloss/shadow for realism */
+        .control::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
         }
 
         .control.red {
-            background: #ff5f57;
+            background: #FF5F56;
+            box-shadow: 0 0 0 0.5px #E0443E;
         }
 
         .control.yellow {
-            background: #febc2e;
+            background: #FFBD2E;
+            box-shadow: 0 0 0 0.5px #DEA123;
         }
 
         .control.green {
-            background: #28c840;
+            background: #27C93F;
+            box-shadow: 0 0 0 0.5px #1AAB29;
         }
 
         .tabs {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: flex-end;
             flex: 1;
+            height: 100%;
         }
 
         .tab {
-            height: 28px;
-            min-width: 190px;
-            padding: 0 12px;
+            height: 34px;
+            /* Taller active tab */
+            min-width: 180px;
+            padding: 0 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             border-radius: 10px 10px 0 0;
-            background: var(--tab-bg);
-            color: var(--tab-muted);
+            /* Modern curved top */
+            background: transparent;
+            color: var(--tab-text);
             font-size: 12px;
+            font-weight: 500;
+            position: relative;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tab:not(.active):hover {
+            background: var(--tab-hover);
         }
 
         .tab.active {
             background: var(--tab-active);
-            color: var(--tab-text);
+            color: var(--tab-text-active);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+            /* Subtle definition */
+        }
+
+        /* Smooth visual connector for active tab to toolbar */
+        .tab.active::before,
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 0;
+            pointer-events: none;
+        }
+
+        /* Corner smoothing magic (simple version) */
+        .tab.active::before {
+            left: -12px;
+            background: radial-gradient(circle at 0 0, transparent 12px, var(--tab-active) 12px);
+        }
+
+        .tab.active::after {
+            right: -12px;
+            background: radial-gradient(circle at 100% 0, transparent 12px, var(--tab-active) 12px);
         }
 
         .tab .favicon {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 4px;
-            background: #111317;
+            background: #000;
             display: grid;
             place-items: center;
-            color: #ffffff;
+            color: #fff;
             font-size: 10px;
             font-weight: 700;
         }
@@ -267,82 +341,110 @@
             margin-left: auto;
             width: 16px;
             height: 16px;
-            border-radius: 4px;
+            border-radius: 3px;
             display: grid;
             place-items: center;
-            color: #b0b6bf;
-            font-size: 11px;
+            color: inherit;
+            opacity: 0.6;
+            font-size: 10px;
         }
 
-        .tab.new {
-            min-width: 34px;
-            width: 34px;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--tab-text);
+        .tab .close:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .toolbar {
-            height: 46px;
+            height: 52px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 0 12px;
+            gap: 16px;
+            padding: 0 16px;
             background: var(--chrome-toolbar);
             border-bottom: 1px solid var(--chrome-border);
+            z-index: 9;
         }
 
         .nav-buttons {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .nav-btn {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #1c1e23;
-            border: 1px solid #2e3239;
+            background: transparent;
+            color: #A1A1AA;
             display: grid;
             place-items: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: #202124;
         }
 
         .omnibox {
             flex: 1;
-            height: 32px;
-            border-radius: 10px;
+            height: 34px;
+            border-radius: 18px;
+            /* More pill-shaped */
             background: var(--omnibox-bg);
-            border: 1px solid var(--omnibox-border);
+            border: 2px solid transparent;
+            /* Prepare for focus */
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 0 12px;
-            font-size: 12px;
+            gap: 10px;
+            padding: 0 14px;
+            font-size: 13px;
             color: var(--omnibox-text);
             overflow: hidden;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+            /* Subtle Outline */
+        }
+
+        .omnibox:hover {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .omnibox .url {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: var(--omnibox-muted);
         }
+
+        .omnibox .url span {
+            color: var(--omnibox-text);
+        }
+
+        /* Domain highlight */
 
         .toolbar-icons {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             align-items: center;
         }
 
         .tool-icon {
-            width: 26px;
-            height: 26px;
-            border-radius: 8px;
-            background: #1c1e23;
-            border: 1px solid #2e3239;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: transparent;
+            color: #A1A1AA;
             display: grid;
             place-items: center;
+            cursor: pointer;
+        }
+
+        .tool-icon:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: #202124;
         }
 
         .browser-content {
@@ -1267,67 +1369,83 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2000;
-            border: 1px solid rgba(96, 165, 250, 0.7);
-            background: radial-gradient(circle at top, rgba(59, 130, 246, 0.25), rgba(15, 23, 42, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* Subtle highlight */
+            background: linear-gradient(145deg, #1e2025, #111216);
+            /* Deep Enterprise Dark */
             color: #f8fafc;
-            padding: 18px 22px;
-            border-radius: 18px;
-            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.5);
+            padding: 18px 24px;
+            border-radius: 12px;
+            /* Slightly tighter radius */
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.4),
+                /* Outer dark definition */
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                /* Deep shadow */
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            /* Inner lighting */
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
+            /* Tighter gap */
             align-items: center;
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s;
         }
 
         .demo-cta:hover {
             transform: translate(-50%, -50%) scale(1.02);
-            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.6);
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.5),
+                0 24px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .demo-cta.hidden {
             opacity: 0;
             pointer-events: none;
-            transform: translate(-50%, -46%) scale(0.98);
+            transform: translate(-50%, -46%) scale(0.95);
         }
 
         .demo-cta-title {
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.6px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
+            color: #FFFFFF;
         }
 
         .demo-cta-subtitle {
             font-size: 12px;
-            color: #cbd5e1;
+            color: #9CA3AF;
+            /* Muted gray */
             text-align: center;
+            font-weight: 500;
         }
 
         .demo-cta-pulse {
             position: absolute;
-            inset: -12px;
-            border-radius: 22px;
-            border: 1px solid rgba(96, 165, 250, 0.4);
-            animation: demoPulse 2.4s ease-in-out infinite;
+            inset: -4px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            animation: demoPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             pointer-events: none;
+            opacity: 0;
         }
 
         @keyframes demoPulse {
             0% {
-                opacity: 0.35;
-                transform: scale(0.98);
+                opacity: 0;
+                transform: scale(0.95);
             }
 
-            70% {
-                opacity: 0;
-                transform: scale(1.08);
+            30% {
+                opacity: 0.3;
             }
 
             100% {
                 opacity: 0;
-                transform: scale(1.08);
+                transform: scale(1.3);
             }
         }
 
