@@ -1306,12 +1306,12 @@
             border-color: rgba(96, 165, 250, 0.8);
         }
 
-        /* Updated Demo Caption - Floating Toast */
+        /* Updated Demo Caption - Floating Toast (Centered) */
         .demo-caption {
             position: absolute;
-            bottom: 40px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            transform: translate(-50%, -50%) scale(0.95) translateY(10px);
             z-index: 2010;
             display: flex;
             align-items: center;
@@ -1321,7 +1321,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 99px;
             box-shadow:
-                0 10px 40px -10px rgba(0, 0, 0, 0.5),
+                0 20px 50px -10px rgba(0, 0, 0, 0.5),
                 0 0 0 1px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(12px);
             opacity: 0;
@@ -1334,7 +1334,7 @@
         .demo-caption.show {
             opacity: 1;
             padding: 16px 20px;
-            transform: translateX(-50%) translateY(0);
+            transform: translate(-50%, -50%) scale(1);
             pointer-events: auto;
             margin: 0;
             max-height: none;
@@ -3106,6 +3106,15 @@
                 <span class="demo-cta-title">Play Demo</span>
                 <span class="demo-cta-subtitle">See bookmarks, prompts, and save flows in 20 seconds.</span>
             </button>
+
+            <!-- Floated Demo Toast -->
+            <div class="demo-caption" aria-live="polite">
+                <div class="demo-step"></div>
+                <div>
+                    <div class="demo-title"></div>
+                    <div class="demo-subtitle"></div>
+                </div>
+            </div>
 
             </div>
             </div>
