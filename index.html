@@ -1992,18 +1992,34 @@
             }
         }
 
-        /* Hide interactive demo on mobile/tablet */
+        /* Mobile/tablet: scale the full desktop chrome window to fit */
         @media (max-width: 768px) {
             .desktop {
-                display: none !important;
+                display: flex !important;
+                width: 1200px;
+                transform-origin: top left;
+                /* scale applied by JS */
             }
 
-            .demo-cta {
-                display: none !important;
+            .chrome-window {
+                height: 700px;
+                border-radius: 12px;
+                box-shadow:
+                    0 0 0 1px rgba(255, 255, 255, 0.1),
+                    0 20px 60px -10px rgba(0, 0, 0, 0.5);
             }
 
-            .demo-caption {
-                display: none !important;
+            /* Override earlier breakpoints that hide these */
+            .sidebar {
+                display: flex !important;
+            }
+
+            .side-panel {
+                display: flex !important;
+            }
+
+            .menu-bar {
+                display: flex !important;
             }
 
             .final-cta {
@@ -4174,6 +4190,31 @@
                     });
                 });
             }
+        })();
+    </script>
+
+    <!-- Mobile: scale desktop chrome window to fit viewport -->
+    <script>
+        (function () {
+            var desktop = document.querySelector('.desktop');
+            if (!desktop) return;
+            var DESKTOP_W = 1200;
+            var CHROME_H = 700;
+            var PADDING = 32;
+            function applyScale() {
+                if (window.innerWidth > 768) {
+                    desktop.style.transform = '';
+                    desktop.style.marginLeft = '';
+                    desktop.style.marginBottom = '';
+                    return;
+                }
+                var scale = (window.innerWidth - PADDING) / DESKTOP_W;
+                desktop.style.transform = 'scale(' + scale + ')';
+                desktop.style.marginLeft = (PADDING / 2) + 'px';
+                desktop.style.marginBottom = (scale * CHROME_H - CHROME_H) + 'px';
+            }
+            applyScale();
+            window.addEventListener('resize', applyScale);
         })();
     </script>
 </body>
