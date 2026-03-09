@@ -4,7 +4,7 @@
   "description": "Chat Navigator Landing Page",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && tailwindcss -i ./src/input.css -o ./dist/output.css --minify && cp *.html *.jpg *.txt *.xml dist/",
+    "build": "rm -rf dist && mkdir dist && tailwindcss -i ./src/input.css -o ./dist/output.css --minify && cp *.html *.jpg *.txt *.xml dist/ && cp -r extensions dist/",
     "dev": "tailwindcss -i ./src/input.css -o ./output.css --watch"
   },
   "keywords": [],
