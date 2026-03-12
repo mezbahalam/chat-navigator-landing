@@ -167,6 +167,7 @@
             gap: 0;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .chrome-window {
@@ -1330,113 +1331,110 @@
             border-color: rgba(96, 165, 250, 0.8);
         }
 
-        /* Updated Demo Caption - Floating Toast (Centered) */
+        /* Demo Caption — premium announcement strip */
         .demo-caption {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95) translateY(10px);
-            z-index: 2010;
+            position: static;
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 16px 20px;
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 99px;
-            box-shadow:
-                0 20px 50px -10px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(12px);
+            gap: 12px;
+            padding: 0 22px;
+            background: linear-gradient(90deg, #eef2ff 0%, #fafbff 100%);
+            border-top: 1px solid #e0e7ff;
+            box-shadow: inset 4px 0 0 0 #6366f1;
+            max-height: 0;
+            overflow: hidden;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            min-width: 320px;
-            max-width: 500px;
+            transition:
+                max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease,
+                padding 0.35s ease;
+            left: unset;
+            transform: none;
+            z-index: auto;
         }
 
         .demo-caption.show {
+            max-height: 60px;
             opacity: 1;
-            padding: 16px 20px;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-            margin: 0;
-            max-height: none;
-            border-width: 1px;
+            padding: 13px 22px 13px 20px;
+            transform: none;
         }
 
-        /* Adjust internal layout for horizontal flow */
+        /* Remove old dot pseudo-element */
+        .demo-caption::before {
+            display: none;
+        }
+
+        /* Internal layout */
         .demo-caption>div:last-child {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .demo-step {
-            background: #2563EB;
-            /* Bright Blue */
-            color: #FFFFFF;
-            border-radius: 99px;
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-            white-space: nowrap;
-            border: none;
+        /* Separator dot between title and subtitle */
+        .demo-caption>div:last-child::before {
+            display: none;
         }
 
         .demo-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 700;
+            color: #312e81;
             line-height: 1.2;
-            margin-bottom: 2px;
+            letter-spacing: -0.01em;
+        }
+
+        /* Middot separator — injected via CSS */
+        .demo-title::after {
+            content: ' ·';
+            font-weight: 400;
+            color: #a5b4fc;
+            margin-left: 1px;
         }
 
         .demo-subtitle {
-            font-size: 13px;
-            color: #9CA3AF;
-            line-height: 1.4;
+            font-size: 12.5px;
+            color: #4338ca;
+            font-weight: 400;
+            line-height: 1.2;
+            opacity: 0.8;
         }
 
+        /* Demo CTA — Premium indigo gradient pill */
         .demo-cta {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2000;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            /* Subtle highlight */
-            background: linear-gradient(145deg, #1e2025, #111216);
-            /* Deep Enterprise Dark */
-            color: #f8fafc;
-            padding: 18px 24px;
-            border-radius: 12px;
-            /* Slightly tighter radius */
+            background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
+            color: #ffffff;
+            padding: 14px 28px;
+            border-radius: 99px;
+            border: none;
             box-shadow:
-                0 0 0 1px rgba(0, 0, 0, 0.4),
-                /* Outer dark definition */
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                /* Deep shadow */
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            /* Inner lighting */
+                0 0 0 1px rgba(99, 102, 241, 0.3),
+                0 8px 32px rgba(99, 102, 241, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            /* Tighter gap */
             align-items: center;
+            gap: 2px;
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s;
+            transition:
+                transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 0.2s ease;
         }
 
         .demo-cta:hover {
-            transform: translate(-50%, -50%) scale(1.02);
+            transform: translate(-50%, -50%) scale(1.04);
             box-shadow:
-                0 0 0 1px rgba(0, 0, 0, 0.5),
-                0 24px 50px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+                0 0 0 1px rgba(99, 102, 241, 0.4),
+                0 12px 40px rgba(99, 102, 241, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
         .demo-cta.hidden {
@@ -1448,39 +1446,36 @@
         .demo-cta-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 2px;
+            gap: 8px;
         }
 
         .demo-cta-icon {
-            width: 20px;
-            height: 20px;
-            color: #34D399;
-            /* Emerald 400 */
+            width: 16px;
+            height: 16px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .demo-cta-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: #FFFFFF;
+            letter-spacing: 0.3px;
+            color: #ffffff;
         }
 
         .demo-cta-subtitle {
-            font-size: 12px;
-            color: #9CA3AF;
-            /* Muted gray */
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.72);
             text-align: center;
-            font-weight: 500;
+            font-weight: 400;
+            letter-spacing: 0;
         }
 
         .demo-cta-pulse {
             position: absolute;
-            inset: -4px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            animation: demoPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            inset: -3px;
+            border-radius: 99px;
+            border: 1.5px solid rgba(99, 102, 241, 0.45);
+            animation: demoPulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             pointer-events: none;
             opacity: 0;
         }
@@ -1488,11 +1483,11 @@
         @keyframes demoPulse {
             0% {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: scale(1);
             }
 
-            30% {
-                opacity: 0.3;
+            25% {
+                opacity: 0.6;
             }
 
             100% {
@@ -2048,6 +2043,20 @@
             .final-cta {
                 display: none !important;
             }
+
+            /* Demo Caption mobile: reduce font size only */
+            .demo-caption>div:last-child {
+                flex-wrap: wrap;
+                gap: 3px;
+            }
+
+            .demo-title {
+                font-size: 11px;
+            }
+
+            .demo-subtitle {
+                font-size: 10.5px;
+            }
         }
     </style>
 
@@ -2508,6 +2517,13 @@
                                         </div>
                                     </div>
                                     <div class="composer-note">ChatGPT can make mistakes. Check important info.
+                                    </div>
+                                </div>
+                                <!-- Demo Caption strip: appears below the chatbox during demo -->
+                                <div class="demo-caption" aria-live="polite">
+                                    <div>
+                                        <div class="demo-title"></div>
+                                        <div class="demo-subtitle"></div>
                                     </div>
                                 </div>
                             </main>
@@ -3191,6 +3207,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Play Demo CTA Button (positioned within demo section) -->
@@ -3207,16 +3224,7 @@
                 <span class="demo-cta-subtitle">See bookmarks, prompts, and save flows in 20 seconds.</span>
             </button>
 
-            <!-- Floated Demo Toast -->
-            <div class="demo-caption" aria-live="polite">
-                <div class="demo-step"></div>
-                <div>
-                    <div class="demo-title"></div>
-                    <div class="demo-subtitle"></div>
-                </div>
-            </div>
 
-            <!-- Final CTA (Absolute) -->
             <!-- Final CTA (Absolute) -->
             <a href="https://chromewebstore.google.com/detail/aapchhfjoohmohpdcadghjacklcdfdml?utm_source=infolily"
                 target="_blank" rel="noopener noreferrer" class="final-cta">
@@ -3897,7 +3905,6 @@
             const demoCaption = document.querySelector('.demo-caption');
             const demoTitle = demoCaption ? demoCaption.querySelector('.demo-title') : null;
             const demoSubtitle = demoCaption ? demoCaption.querySelector('.demo-subtitle') : null;
-            const demoStep = demoCaption ? demoCaption.querySelector('.demo-step') : null;
             const demoControls = document.querySelector('.demo-controls');
             const demoCta = document.querySelector('.demo-cta');
             const finalCta = document.querySelector('.final-cta');
@@ -3946,23 +3953,30 @@
                 return sleep(ms * demoPace);
             }
 
-            function setDemoCaption(step, title, subtitle) {
-                if (!demoCaption || !demoTitle || !demoSubtitle || !demoStep) return;
-                if (!step && !title && !subtitle) {
+            function setDemoCaption(title, subtitle) {
+                if (!demoCaption || !demoTitle || !demoSubtitle) return;
+                if (!title && !subtitle) {
                     demoCaption.classList.remove('show');
                     return;
                 }
-                demoStep.textContent = step || 'Guided demo';
                 demoTitle.textContent = title || '';
                 demoSubtitle.textContent = subtitle || '';
                 demoCaption.classList.add('show');
             }
 
+            function getScale() {
+                if (window.innerWidth > 768) return 1;
+                return (window.innerWidth - 32) / 1200;
+            }
+
             function moveCursorTo(el, opts = {}) {
                 if (!demoCursor || !el) return sleep(0);
                 const rect = el.getBoundingClientRect();
-                const x = rect.left + (opts.x ?? rect.width * 0.5) - 6;
-                const y = rect.top + (opts.y ?? rect.height * 0.5) - 6;
+                const scale = getScale();
+                const offsetX = opts.x !== undefined ? (opts.x * scale) : (rect.width * 0.5);
+                const offsetY = opts.y !== undefined ? (opts.y * scale) : (rect.height * 0.5);
+                const x = rect.left + offsetX - 6;
+                const y = rect.top + offsetY - 6;
                 demoCursor.style.setProperty('--cursor-x', `${x}px`);
                 demoCursor.style.setProperty('--cursor-y', `${y}px`);
                 demoCursor.style.transform = `translate(${x}px, ${y}px)`;
@@ -3991,7 +4005,7 @@
                 document.querySelectorAll('.bookmark-entry.demo-highlight').forEach((entry) => entry.classList.remove('demo-highlight'));
                 if (chatTarget) chatTarget.classList.remove('conversation-glow');
                 if (composerBox) composerBox.classList.remove('demo-glow');
-                setDemoCaption('', '', '');
+                setDemoCaption('', '');
             }
 
             function setComposerText(text) {
@@ -4089,8 +4103,9 @@
                 if (!container || !target) return;
                 const containerRect = container.getBoundingClientRect();
                 const targetRect = target.getBoundingClientRect();
-                const relativeTop = targetRect.top - containerRect.top;
-                const scrollTop = container.scrollTop + relativeTop - (containerRect.height / 2) + (targetRect.height / 2);
+                const scale = getScale();
+                const relativeTop = (targetRect.top - containerRect.top) / scale;
+                const scrollTop = container.scrollTop + relativeTop - (containerRect.height / scale / 2) + (targetRect.height / scale / 2);
                 container.scrollTo({ top: scrollTop, behavior: 'smooth' });
             }
 
@@ -4113,7 +4128,7 @@
                 clearDemoHighlights();
                 hideToast();
                 setActiveTab('messages');
-                setDemoCaption('Step 1 of 5', 'Select the message', 'Click a message to highlight the full answer in the chat.');
+                setDemoCaption('Jump to Messages', 'Click from the sidebar to instantly scroll and highlight that message.');
                 const allBtn = filterButtons.find((btn) => getFilterKey(btn) === 'all');
                 if (allBtn) allBtn.click();
                 if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4131,7 +4146,7 @@
                 highlightConversation(chatTarget, 1200);
 
                 await wait(700);
-                setDemoCaption('Step 2 of 5', 'Bookmark it', 'Click the star to save this answer for later.');
+                setDemoCaption('Bookmark Important Answers', 'Click the star to save any message to your bookmarks.');
                 await moveCursorTo(demoStarBtn, { x: 8, y: 8, duration: 700 });
                 clickCursor();
                 demoStarBtn.click();
@@ -4140,7 +4155,7 @@
                 await wait(900);
                 hideToast();
 
-                setDemoCaption('Step 3 of 5', 'View bookmarks', 'Open the Bookmarks tab to see saved items.');
+                setDemoCaption('View Your Bookmarks', 'Access all your saved messages instantly in the Bookmarks tab.');
                 const bookmarksTab = tabs.find((tab) => tab.textContent.trim().toLowerCase() === 'bookmarks');
                 if (bookmarksTab) {
                     await moveCursorTo(bookmarksTab, { y: 14, duration: 650 });
@@ -4158,7 +4173,7 @@
 
                 await wait(900);
 
-                setDemoCaption('Step 4 of 5', 'Insert a prompt', 'Switch to Prompts and insert a recipe prompt.');
+                setDemoCaption('Reuse Your Prompts', 'Go to the Prompts tab and insert your saved prompt directly into the chatbox.');
                 const promptsTab = tabs.find((tab) => tab.textContent.trim().toLowerCase() === 'prompts');
                 if (promptsTab) {
                     await moveCursorTo(promptsTab, { y: 14, duration: 650 });
@@ -4178,7 +4193,7 @@
                     await moveCursorTo(composerBox || composerText, { y: 10, duration: 800 });
                 }
 
-                setDemoCaption('Step 5 of 5', 'Ready to send', 'The prompt is now in the Message ChatGPT box.');
+                setDemoCaption('Ready to Send', "That's it! Your prompt is in the chatbox, ready to go.");
                 await wait(1300);
                 clearDemoHighlights();
                 demoCursor.classList.remove('visible');
